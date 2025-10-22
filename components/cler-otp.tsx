@@ -1,0 +1,172 @@
+"use client";
+
+import { BookOpen, Lock, MessageCircle, Phone, TvMinimal } from "lucide-react";
+import { useState } from "react";
+import { motion } from "motion/react";
+
+export default function ClerkOTP() {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const containerVariants = {
+    open: {},
+    close: {},
+  };
+
+  return (
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="w-100 h-60 rounded-2xl bg-linear-to-b relative from-[#212126] to-[#141417] border border-neutral-800 flex flex-col p-2 justify-between"
+    >
+      <motion.div
+        variants={containerVariants}
+        animate={isHovered ? "open" : "close"}
+        initial={false}
+        className="relative mx-auto p-2 h-56 "
+      >
+        <PhoneRender isHovered={isHovered} />
+      </motion.div>
+      <div className="absolute bottom-0 left-0 bg-transparent rounded-b-2xl w-full p-5">
+        <h3 className="text-sm text-neutral-300 font-semibold">
+          Email and SMS one-time passcodes
+        </h3>
+        <p className="text-xs text-neutral-400 mt-2">
+          Fast and reliable one-time passcode delivery with built-in brute force
+          prevention.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function PhoneRender({ isHovered }: { isHovered: boolean }) {
+  const icons = [
+    {
+      icon: <Phone />,
+      notification: false,
+      name: "Phone",
+    },
+    {
+      icon: <MessageCircle />,
+      notification: true,
+      name: "SMS",
+    },
+    {
+      icon: <BookOpen />,
+      notification: false,
+      name: "Books",
+    },
+    {
+      icon: <TvMinimal />,
+      notification: false,
+      name: "TV",
+    },
+  ];
+
+  const phoneVariants = {
+    open: {
+      y: -22,
+    },
+    close: {
+      y: 0,
+    },
+  };
+
+  const glowVariants = {
+    open: {
+      backgroundColor: "var(--color-cyan-300)",
+      color: "black",
+      border: "1px solid var(--color-cyan-300)",
+      boxShadow: "0 0 7px 1px var(--color-cyan-300)",
+    },
+    close: {},
+  };
+
+  const notificationVariants = {
+    open: {
+      opacity: 1,
+      y: 40,
+      filter: "blur(0px)",
+      scale: 1,
+      transition: {
+        delay: 0.1,
+        duration: 0.3,
+      },
+    },
+    close: {
+      opacity: 0,
+      y: -10,
+      filter: "blur(10px)",
+      scale: 0.8,
+    },
+  };
+
+  return (
+    <motion.div
+      variants={phoneVariants}
+      animate={isHovered ? "open" : "close"}
+      style={{
+        maskImage: `linear-gradient(to bottom,black 10%,transparent ${
+          isHovered ? 84 : 80
+        }%)`,
+      }}
+      initial={false}
+      exit="close"
+      className="w-60 h-60 p-3 flex flex-col items-center rounded-t-4xl border-4 border-neutral-500 inset-shadow-sm/50 inset-shadow-white relative"
+    >
+      <motion.div
+        variants={notificationVariants}
+        className="absolute w-[90%] bg-neutral-700 p-2 rounded-lg z-100 flex gap-2 items-center justify-between shadow-xl shadow-black"
+      >
+        <div>
+          <div className="bg-neutral-300 p-2 rounded-lg">
+            <div className="p-1.5 bg-cyan-300 rounded-full [box-shadow:0_0_5px_2px_var(--color-cyan-300)]">
+              <MessageCircle size={14} color="black" />
+            </div>
+          </div>
+        </div>
+        <div className="flex-1">
+          <p className="text-cyan-300 text-[10px] font-semibold">
+            Security Alert
+          </p>
+          <p className="text-[10px]">Your security code is 90112...</p>
+        </div>
+      </motion.div>
+      <motion.div
+        variants={glowVariants}
+        className="p-1.5 bg-black rounded-full"
+      >
+        <Lock size={12} />
+      </motion.div>
+      <div className="mt-6 flex items-center justify-around w-full">
+        {icons.map((icon, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-center gap-1 relative"
+          >
+            {icon.notification && (
+              <motion.div
+                variants={glowVariants}
+                className="absolute -top-1 -left-1 w-3 h-3 bg-neutral-200 rounded-full flex items-center justify-center"
+              >
+                <p className="text-[7px] text-neutral-900 mt-px">1</p>
+              </motion.div>
+            )}
+            <div className="bg-neutral-400/20 p-1.5 rounded-lg w-10 h-10 flex items-center justify-center">
+              {icon.icon}
+            </div>
+            <p className="text-xs text-neutral-300">{icon.name}</p>
+          </div>
+        ))}
+      </div>
+      <div className="flex items-center justify-center gap-3 mt-3">
+        {[0, 1, 2, 3].map((_, index) => (
+          <motion.div
+            key={index}
+            className="bg-neutral-400/20 p-1.5 w-10 h-10 rounded-lg"
+          ></motion.div>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
