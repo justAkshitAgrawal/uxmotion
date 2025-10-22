@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UX Motion
 
-## Getting Started
+## The Design System for Feeling
 
-First, run the development server:
+Beautifully animated, production-ready UI components - built with React and motion.dev.
+Crafted for developers who care about how their interfaces feel, not just how they look.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### What is UXMotion?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+UXMotion is an open-source gallery of modern, elegant UI components designed to make motion design accessible to every frontend developer.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Each component blends clean design, smooth interaction, and developer-ready code — so your UI doesn’t just function, it feels alive.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### What You’ll Discover
 
-## Learn More
+- ✨ Production-Ready Components — Copy, paste, and ship.
+- 🎨 Motion That Feels Right — Subtle, natural, and purposeful.
+- ⚡ Built for Developers — React + motion.dev + Tailwind CSS.
+- 💡 Designed for UX — Every animation has intent and emotion.
 
-To learn more about Next.js, take a look at the following resources:
+### Explore
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Browse the sidebar to explore different categories:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **[Micro-Interactions](/micro-interactions)** - Small, delightful moments that elevate UX
 
-## Deploy on Vercel
+Each component includes:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Live interactive preview
+- Complete source code
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Built With
+
+- **React 19** - Latest React features
+- **motion.dev** - Powerful animation library
+- **Tailwind CSS** - Utility-first styling
+- **Next.js 16** - App router and server components
+
+---
+
+**Why UXMotion?**
+
+_Because motion is the language of emotion.
+UXMotion helps you design experiences that move — both literally and emotionally._
