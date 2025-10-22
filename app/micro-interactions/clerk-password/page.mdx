@@ -1,0 +1,185 @@
+# Clerk Password
+
+A Clerk Password Vault animation with smooth transitions and visual feedback.
+
+import ClerkPassVault from "@/components/clerk-pass";
+import { Tabs } from "nextra/components";
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <div className="w-full h-full p-10 flex items-center justify-center">
+      <ClerkPassVault />
+    </div>
+  </Tabs.Tab>
+  <Tabs.Tab>
+```tsx
+"use client";
+
+import { motion } from "motion/react";
+import { useState } from "react";
+import { GoShieldCheck, GoShieldX } from "react-icons/go";
+
+export default function ClerkPassVault() {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const childVariants = {
+    open: {
+      y: -10,
+      transition: {
+        duration: 0.3,
+      },
+    },
+    close: {
+      y: 0,
+    },
+  };
+
+  const parentVariants = {
+    open: {},
+    close: {},
+  };
+
+  const inputVariants = {
+    open: {
+      y: -7,
+      border: "1px solid var(--color-cyan-400)",
+      boxShadow: "0 0 10px 1px var(--color-cyan-400)",
+      transition: {
+        duration: 0.3,
+        staggerChildren: 0.3,
+        delayChildren: 0.3,
+      },
+    },
+    close: {
+      y: 0,
+    },
+  };
+
+  const passVariants = {
+    open: {
+      opacity: 1,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.8,
+      },
+    },
+    close: {
+      opacity: 0,
+      filter: "blur(10px)",
+    },
+  };
+
+  const passIconVariants = {
+    open: {
+      y: -80,
+      color: "red",
+      transition: {
+        delay: 3,
+        duration: 0.5,
+      },
+    },
+    close: {
+      y: 13,
+      color: "white",
+    },
+  };
+
+  const passIconSwitchVariants = {
+    open: {
+      y: -16,
+      color: "green",
+      transition: {
+        delay: 3,
+        duration: 0.5,
+      },
+    },
+    close: {
+      y: 80,
+      color: "white",
+    },
+  };
+
+  return (
+    <motion.div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      variants={parentVariants}
+      animate={isHovered ? "open" : "close"}
+      initial={false}
+      exit="close"
+      className="w-100 h-60 rounded-2xl bg-linear-to-b from-[#212126] relative to-[#141417] border border-neutral-800 flex flex-col p-7 justify-between overflow-clip"
+    >
+      <div></div>
+      <motion.div
+        variants={childVariants}
+        className="absolute h-52 w-[80%] mx-auto flex justify-center items-center inset-0 mt-10 bg-neutral-400 [clip-path:polygon(10%_0,90%_0,100%_10%,100%_50%,0%_50%,0%_10%)] [mask-image:linear-gradient(to_bottom,black_40%,transparent_50%)]"
+      ></motion.div>
+      <motion.div
+        variants={passVariants}
+        className="absolute h-52 w-[80%] mx-auto flex justify-center items-center inset-0 mt-10 bg-cyan-400 [clip-path:polygon(10%_0,90%_0,100%_10%,100%_50%,0%_50%,0%_10%)] [mask-image:linear-gradient(to_bottom,black_40%,transparent_50%)]"
+      ></motion.div>
+      <motion.div
+        variants={childVariants}
+        className="absolute w-full h-1 bg-cyan-400 top-[45%] left-0"
+      ></motion.div>
+      <motion.div
+        variants={passIconVariants}
+        className="absolute w-8 h-8 flex items-center justify-center left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
+      >
+        <GoShieldX className="w-8 h-8" />
+      </motion.div>
+      <motion.div
+        variants={passIconSwitchVariants}
+        className="absolute w-8 h-8 flex items-center justify-center left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
+      >
+        <GoShieldCheck className="w-8 h-8" />
+      </motion.div>
+      <div className="flex flex-col gap-2">
+        <motion.input
+          variants={inputVariants}
+          type="password"
+          placeholder="Enter your password"
+          className="w-full p-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent"
+        />
+        <div className="flex justify-between items-center">
+          <motion.span
+            variants={inputVariants}
+            className="text-xs text-neutral-400"
+          >
+            Forgot password?
+          </motion.span>
+          <motion.button
+            variants={inputVariants}
+            className="px-4 py-2 bg-cyan-500 text-white rounded-lg text-sm font-medium hover:bg-cyan-600 transition-colors"
+          >
+            Sign In
+          </motion.button>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+```
+  </Tabs.Tab>
+</Tabs>
+
+## Requirements
+
+Install the required dependencies:
+
+```bash
+npm install motion react-icons
+```
+
+Or with other package managers:
+
+```bash
+# pnpm
+pnpm add motion react-icons
+
+# yarn
+yarn add motion react-icons
+
+# bun
+bun add motion react-icons
+```
