@@ -1,0 +1,185 @@
+# Clerk Session Management
+
+A Clerk Session Management component with smooth animations and device information display.
+
+import ClerkSession from "@/components/clerk-session";
+import { Tabs } from "nextra/components";
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <div className="w-full h-full p-10 flex items-center justify-center">
+      <ClerkSession />
+    </div>
+  </Tabs.Tab>
+  <Tabs.Tab>
+```tsx
+"use client";
+
+import { useState } from "react";
+import { motion } from "motion/react";
+import { Hexagon } from "lucide-react";
+
+export default function ClerkSession() {
+  const content = [
+    {
+      title: "Device",
+      desc: "MacBook Pro",
+    },
+    {
+      title: "Browser",
+      desc: "Chrome",
+    },
+    {
+      title: "Location",
+      desc: "New York",
+    },
+  ];
+
+  const [isHovered, setIsHovered] = useState(false);
+
+  const containerVariants = {
+    initial: {},
+    hover: {},
+  };
+
+  const textContainerVariants = {
+    initial: {},
+    hover: {
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const descVariants = {
+    initial: {
+      filter: "blur(6px)",
+      opacity: 0,
+    },
+    hover: {
+      filter: "blur(0)",
+      opacity: 1,
+    },
+  };
+
+  const titleVariants = {
+    initial: {
+      x: 80,
+    },
+    hover: {
+      x: 3,
+    },
+  };
+
+  const signOutButtonVariants = {
+    initial: {
+      opacity: 0.1,
+    },
+    hover: {
+      opacity: 1,
+      transition: {
+        duration: 1.7,
+      },
+    },
+  };
+
+  return (
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="w-[25rem] h-[30rem] overflow-clip rounded-2xl bg-gradient-to-b relative from-[#212126] to-[#141417] border border-neutral-800 flex flex-col p-4 justify-between"
+    >
+      <div className="z-10 relative">
+        <p className="text-sm font-semibold">Session Management</p>
+        <p className="text-sm text-neutral-400 mt-2">
+          Clerk manages the full session lifecycle, including critical security
+          functionality like active device monitoring and session revocation.
+        </p>
+      </div>
+      <div className="flex-1 mt-10 z-20">
+        <motion.div
+          variants={containerVariants}
+          initial="initial"
+          animate={isHovered ? "hover" : "initial"}
+          className="flex flex-col w-[15rem] mx-auto items-center h-[17rem] rounded-xl bg-neutral-800/10 border border-neutral-800 p-4 shadow-xl shadow-black/60"
+        >
+          <div className="relative isolate z-40 mx-auto flex justify-center">
+            <Laptop />
+          </div>
+
+          {/* Text Container */}
+          <motion.div
+            variants={textContainerVariants}
+            className="flex flex-col gap-2 divide-y mt-10 w-full divide-neutral-600 relative "
+          >
+            {content.map((item, index) => (
+              <div key={index} className="flex flex-col gap-1 pt-2">
+                <motion.p
+                  variants={titleVariants}
+                  className="text-xs text-neutral-400"
+                >
+                  {item.title}
+                </motion.p>
+                <motion.p
+                  variants={descVariants}
+                  className="text-sm font-medium text-neutral-200"
+                >
+                  {item.desc}
+                </motion.p>
+              </div>
+            ))}
+          </motion.div>
+        </motion.div>
+      </div>
+
+      <motion.div
+        variants={signOutButtonVariants}
+        className="flex items-center justify-center gap-2 mt-4"
+      >
+        <button className="px-4 py-2 bg-red-500/20 text-red-400 rounded-lg text-sm font-medium hover:bg-red-500/30 transition-colors">
+          Sign out all other devices
+        </button>
+      </motion.div>
+    </div>
+  );
+}
+
+function Laptop() {
+  return (
+    <div className="relative">
+      <div className="absolute inset-0 bg-gradient-to-b from-teal-500/20 to-transparent rounded-lg blur-2xl -z-10" />
+      <div className="relative">
+        <div className="w-32 h-20 bg-neutral-900 rounded-lg border border-neutral-800 shadow-2xl flex items-center justify-center">
+          <div className="w-2 h-2 rounded-full bg-teal-500 animate-pulse" />
+        </div>
+        <div className="w-36 h-1.5 bg-neutral-800 mx-auto rounded-b-md" />
+        <div className="w-40 h-1 bg-neutral-800/80 mx-auto rounded-b-md" />
+      </div>
+    </div>
+  );
+}
+```
+  </Tabs.Tab>
+</Tabs>
+
+## Requirements
+
+Install the required dependencies:
+
+```bash
+npm install motion lucide-react
+```
+
+Or with other package managers:
+
+```bash
+# pnpm
+pnpm add motion lucide-react
+
+# yarn
+yarn add motion lucide-react
+
+# bun
+bun add motion lucide-react
+```
